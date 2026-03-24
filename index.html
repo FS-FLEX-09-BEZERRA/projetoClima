@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="./assets/weather.gif" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Projeto Clima</title>
+</head>
+<body id="body" class="bg-[url(./assets/bg.jpg)] bg-cover h-screen flex items-center justify-center">
+  <button onclick="limparDados()" id="link" class="hidden fixed top-3 left-3 underline text-blue-600">Limpar</button>
+  <main class="bg-white/50 backdrop-blur-md w-1/4 flex flex-col items-center p-5 rounded-2xl shadow-2xl">
+    <div class="flex items-center gap-5">
+      <img class="h-20" src="./assets/weather.gif" alt="icone nuvem">
+      <h1 class="text-2xl font-semibold">Clima</h1>
+    </div>
+    <form onsubmit="buscarClimaCidade(event)" class="flex items-center gap-3">
+      <input id="cidade" name="cidade" placeholder="Digite uma cidade" type="text" class="outline-cyan-600 rounded p-1 bg-white">
+      <button class="rounded p-1 bg-white" type="submit">
+        <img class="h-6" src="./assets/lupas.png" alt="">
+      </button>
+    </form>
+    <div id="resultado" class="w-full text-center">
+      <p id="loading" class="text-red-500 mt-5 font-semibold hidden">Carregando...</p>
+    </div>
+  </main>
+  <div id="alert" role="alert" class="alert alert-error opacity-0 transition-opacity duration-1000 fixed bottom-3 right-3 ">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  <span>Erro! Cidade é obrigatório.</span>
+</div>
+  <script src="./script/index.js"></script>
+</body>
+</html>

@@ -34,17 +34,27 @@
 //--------------------------------------------------
 
 async function buscarClimaCidade(event) {
+  console.log(event)
   event.preventDefault()
-  const cidade = document.getElementById("cidade").value
+  // const cidade = document.getElementById("cidade").value
+  const cidade = event.target[0].value
+  console.log(cidade)
   const loading = document.getElementById("loading")
+  const alert = document.getElementById("alert")
   try {
     if (!cidade) {
-      console.log("cidade é obrigatório")
+      alert.classList.remove("opacity-0")
+      alert.classList.add("opacity-100")
+      setTimeout(() => {
+        alert.classList.remove("opacity-100")
+        alert.classList.add("opacity-0")
+      }, 2000)
       return
     }
     loading.classList.remove("hidden")
     const APIkey = "22239c8a61c9640117c190e171a86ae2"
     const resposta = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${APIkey}&units=metric&lang=pt_br`)
+    console.log("resposta:", resposta)
     const dados = await resposta.json()
     mostrarDados(dados)
     console.log(dados)
@@ -53,9 +63,16 @@ async function buscarClimaCidade(event) {
     console.error(error)
   }
 }
-
 function mostrarDados(dados) {
   const resultado = document.getElementById("resultado")
+  const body = document.getElementById("body")
+
+  if (dados.weather[0].description === 'trovoadas') {
+    body.classList.remove("bg-[url(../assets/bg.jpg)]")
+    body.classList.add("bg-[url(../assets/animation.gif)]")
+  }
+
+  link.classList.remove("hidden")
 
   resultado.innerHTML = `
   <h2 class="text-xl font-bold">${dados.name}</h2>
@@ -67,4 +84,9 @@ function mostrarDados(dados) {
     <span>${dados.main.humidity}%</span>
   </div>
   `
+
+}
+
+function limparDados() {
+  window.location.href = "/index.html"
 }
